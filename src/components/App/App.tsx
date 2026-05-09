@@ -22,6 +22,7 @@ export default function App() {
     queryKey: ["movies", searchQuery, currentPage],
     queryFn: () => fetchMovies(searchQuery, currentPage),
     enabled: searchQuery !== "",
+    placeholderData: (previousData) => previousData,
   });
 
   const movies = useMemo(() => data?.results ?? [], [data]);
