@@ -8,7 +8,13 @@ interface SearchBarProps {
 export default function SearchBar({
   onSubmit,
 }: SearchBarProps) {
-  const handleSubmit = (formData: FormData) => {
+  const handleSubmit = (
+    event: React.FormEvent<HTMLFormElement>
+  ) => {
+    event.preventDefault();
+
+    const formData = new FormData(event.currentTarget);
+
     const query = formData.get("query") as string;
 
     if (query.trim() === "") {
@@ -17,6 +23,8 @@ export default function SearchBar({
     }
 
     onSubmit(query.trim());
+
+    event.currentTarget.reset();
   };
 
   return (
@@ -33,7 +41,7 @@ export default function SearchBar({
 
         <form
           className={css.form}
-          action={handleSubmit as unknown as string}
+          onSubmit={handleSubmit}
         >
           <input
             className={css.input}
