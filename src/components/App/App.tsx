@@ -82,6 +82,7 @@ export default function App() {
           )}
         </>
       )}
+      
 
       {selectedMovie && (
         <MovieModal
